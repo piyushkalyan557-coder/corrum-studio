@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORRUM — AI UGC & Logo Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #080810;
+            color: #f0f0f8;
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(8, 8, 16, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(232, 213, 196, 0.15);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #E8D5C4;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #7a7a9a;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1.5px;
+            background: #E8D5C4;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: #E8D5C4; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #080810 !important;
+            background: linear-gradient(135deg, #E8D5C4, #A78FB0);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232,213,196,0.3);
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        /* FIX 1 — HAMBURGER MENU */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px; height: 2px;
+            background: #E8D5C4;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 8, 16, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .mobile-nav.open { display: flex; }
+
+        .mobile-nav a {
+            color: #f0f0f8;
+            text-decoration: none;
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .mobile-nav a:hover { color: #E8D5C4; }
+
+        /* ── MAIN ── */
+        main { margin-top: 70px; }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0e0e1a 0%, #080810 100%);
+            padding: 2rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* subtle glow */
+        #hero::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(232,213,196,0.06) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .hero-content { max-width: 800px; position: relative; z-index: 1; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(232, 213, 196, 0.08);
+            border: 1px solid rgba(232, 213, 196, 0.25);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #E8D5C4;
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-dot {
+            width: 7px; height: 7px;
+            background: #A78FB0;
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:0.4; transform:scale(1.5); }
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #E8D5C4 0%, #A78FB0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: #7a7a9a;
+            margin-bottom: 2.5rem;
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            line-height: 1.75;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-family: 'DM Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #E8D5C4 0%, #A78FB0 100%);
+            color: #080810;
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(232, 213, 196, 0.3);
+        }
+
+        .btn-outline {
+            border: 1.5px solid rgba(232,213,196,0.5);
+            color: #E8D5C4;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: rgba(232, 213, 196, 0.08);
+            border-color: #E8D5C4;
+            transform: translateY(-3px);
+        }
+
+        /* ── SECTIONS ── */
+        /* FIX 3 — Alternate section backgrounds fixed (no longer using nth-child on sections inside main) */
+        .section-light { background: #0e0e1a; }
+        .section-dark  { background: #080810; }
+
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            color: #E8D5C4;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        .section-desc {
+            color: #7a7a9a;
+            margin-bottom: 3rem;
+            max-width: 520px;
+            font-weight: 300;
+            line-height: 1.75;
+        }
+
+        /* ── ABOUT ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-card {
+            background: #12121f;
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(232, 213, 196, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #E8D5C4, #A78FB0);
+        }
+
+        .about-avatar {
+            font-size: 3rem;
+            margin-bottom: 1.2rem;
+            display: block;
+        }
+
+        .about-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #E8D5C4;
+            margin-bottom: 0.4rem;
+            letter-spacing: 1px;
+        }
+
+        .about-role {
+            color: #7a7a9a;
+            font-size: 0.88rem;
+            margin-bottom: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+        }
+
+        .tag {
+            background: rgba(232, 213, 196, 0.08);
+            border: 1px solid rgba(232, 213, 196, 0.18);
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            color: #E8D5C4;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            background: rgba(232,213,196,0.15);
+            transform: translateY(-2px);
+        }
+
+        .about-text p {
+            color: #7a7a9a;
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        .about-text p strong { color: #E8D5C4; font-weight: 600; }
+
+        /* ── SERVICES ── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #12121f;
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(232, 213, 196, 0.1);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(232,213,196,0.04), transparent);
+            transition: left 0.6s;
+        }
+
+        .service-card:hover::before { left: 100%; }
+
+        .service-card:hover {
+            border-color: rgba(232,213,196,0.35);
+            transform: translateY(-10px);
+            box-shadow: 0 24px 60px rgba(232, 213, 196, 0.12);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.3px;
+        }
+
+        .service-card p {
+            color: #7a7a9a;
+            margin-bottom: 1.8rem;
+            font-size: 0.92rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features li {
+            color: #7a7a9a;
+            padding: 0.45rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.88rem;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.2s;
+        }
+
+        .features li:last-child { border-bottom: none; }
+        .features li:hover { color: #E8D5C4; transform: translateX(4px); }
+
+        .features li::before {
+            content: '✓';
+            color: #A78FB0;
+            font-weight: 800;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .price {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #E8D5C4;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ── PROJECTS ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: #12121f;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(232, 213, 196, 0.08);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(232,213,196,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .project-thumb {
+            height: 210px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-thumb.t1 { background: linear-gradient(135deg, #1a1220, #2d1b3d); }
+        .project-thumb.t2 { background: linear-gradient(135deg, #1a1520, #2d2040); }
+        .project-thumb.t3 { background: linear-gradient(135deg, #0e1520, #1a2535); }
+        .project-thumb.t4 { background: linear-gradient(135deg, #1a1015, #301520); }
+
+        .project-thumb::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 60% 40%, rgba(232,213,196,0.08), transparent 60%);
+        }
+
+        .project-info { padding: 1.8rem; }
+
+        .project-type {
+            font-size: 0.7rem;
+            color: #A78FB0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-info h3 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            font-size: 1.05rem;
+            letter-spacing: -0.2px;
+        }
+
+        .project-info p {
+            color: #7a7a9a;
+            font-size: 0.88rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ── PROCESS ── */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: #12121f;
+            border-radius: 20px;
+            border: 1px solid rgba(232, 213, 196, 0.08);
+            transition: all 0.3s;
+        }
+
+        .process-step:hover {
+            border-color: rgba(232,213,196,0.25);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(167,143,176,0.15);
+        }
+
+        .step-num {
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, #E8D5C4, #A78FB0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #080810;
+            margin: 0 auto 1.2rem;
+        }
+
+        .process-step h3 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+
+        .process-step p {
+            color: #7a7a9a;
+            font-size: 0.87rem;
+            font-weight: 300;
+            line-height: 1.65;
+        }
+
+        /* ── CONTACT ── */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-info > p {
+            color: #7a7a9a;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #12121f;
+            padding: 1.1rem 1.3rem;
+            border-radius: 16px;
+            border: 1px solid rgba(232, 213, 196, 0.08);
+            text-decoration: none;
+            color: #f0f0f8;
+            transition: all 0.3s;
+            margin-bottom: 0.9rem;
+        }
+
+        .contact-item:hover {
+            border-color: rgba(232,213,196,0.3);
+            transform: translateX(6px);
+            background: rgba(232,213,196,0.04);
+        }
+
+        .contact-icon {
+            font-size: 1.4rem;
+            width: 44px; height: 44px;
+            background: rgba(232,213,196,0.07);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-text strong { display: block; font-weight: 700; margin-bottom: 2px; font-size: 0.92rem; }
+        .contact-text span { color: #7a7a9a; font-size: 0.8rem; }
+
+        /* FIX 5 — Form select consistent styling */
+        .contact-form {
+            background: #12121f;
+            border: 1px solid rgba(232,213,196,0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+            color: #E8D5C4;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+        .form-group label {
+            font-size: 0.72rem;
+            color: #7a7a9a;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+        }
+
+        /* FIX 5 — All inputs, textarea, select look identical */
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: #0e0e1a;
+            border: 1.5px solid rgba(232, 213, 196, 0.1);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            color: #f0f0f8;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 400;
+            outline: none;
+            width: 100%;
+            transition: all 0.25s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: #4a4a6a; }
+
+        .form-group select option { background: #0e0e1a; color: #f0f0f8; }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: rgba(232,213,196,0.5);
+            background: #12121f;
+            box-shadow: 0 0 0 3px rgba(232,213,196,0.07);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #040408;
+            padding: 2.5rem 5%;
+            border-top: 1px solid rgba(232, 213, 196, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #E8D5C4;
+            letter-spacing: 2px;
+        }
+
+        .footer-copy { color: #4a4a6a; font-size: 0.85rem; }
+
+        .footer-links { display: flex; gap: 1.8rem; }
+
+        .footer-links a {
+            color: #7a7a9a;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: #E8D5C4; }
+
+        /* FIX 4 — TOAST */
+        .toast {
+            position: fixed;
+            bottom: 1.5rem; right: 1.5rem;
+            background: linear-gradient(135deg, #E8D5C4, #A78FB0);
+            color: #080810;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 12px 40px rgba(232,213,196,0.25);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* FIX 2 — SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .about-grid,
+            .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+            .hamburger { display: flex; }
+
+            section { padding: 4rem 5%; }
+
+            h1 { font-size: 2.4rem; }
+            h2 { font-size: 1.8rem; }
+
+            .services-grid,
+            .projects-grid { grid-template-columns: 1fr; }
+
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+
+            .form-row { grid-template-columns: 1fr; }
+
+            .btn-group { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 320px; justify-content: center; }
+
+            footer { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+
+            .toast { right: 1rem; left: 1rem; bottom: 1rem; }
+        }
+
+        /* FIX 1 — Mobile nav properly shown, nothing hidden */
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; letter-spacing: -0.5px; }
+            .process-grid { grid-template-columns: 1fr; }
+            .about-card { padding: 1.8rem; }
+            .contact-form { padding: 1.8rem; }
+            nav { padding: 1rem 4%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- FIX 1 — MOBILE NAV MENU -->
+<div class="mobile-nav" id="mobileNav">
+    <button class="hamburger active" onclick="closeMobileNav()" style="position:absolute;top:1.5rem;right:5%;">
+        <span></span><span></span><span></span>
+    </button>
+    <a href="#about" onclick="closeMobileNav()">About</a>
+    <a href="#services" onclick="closeMobileNav()">Services</a>
+    <a href="#projects" onclick="closeMobileNav()">Projects</a>
+    <a href="#process" onclick="closeMobileNav()">Process</a>
+    <a href="#contact" onclick="closeMobileNav()">Contact</a>
+</div>
+
+<nav>
+    <a href="#hero" class="logo">CORRUM</a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#process">Process</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Work With Me</a>
+    <button class="hamburger" id="hamburger" onclick="openMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<main>
+
+    <!-- HERO -->
+    <!-- FIX 3 — explicit class instead of nth-child -->
+    <section id="hero" class="section-dark" style="max-width:100%;padding:0;">
+        <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:8rem 5% 5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(232,213,196,0.06) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    ✨ Available for Projects
+                </div>
+                <h1>AI-Powered Visuals &<br>Stunning Logo Design</h1>
+                <p class="hero-desc">CORRUM creates scroll-stopping AI UGC content and memorable logo designs that elevate your brand. Based in Punjab, India.</p>
+                <div class="btn-group">
+                    <a href="#projects" class="btn btn-primary">View My Work →</a>
+                    <a href="#contact" class="btn btn-outline">Let's Collaborate</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section-light">
+        <div class="section-inner">
+            <div class="section-label reveal">About CORRUM</div>
+            <h2 class="reveal">Designing Your Digital Future</h2>
+            <div class="about-grid reveal">
+                <div>
+                    <div class="about-card">
+                        <span class="about-avatar">🎨</span>
+                        <div class="about-name">CORRUM</div>
+                        <div class="about-role">AI Content Creator & Designer</div>
+                        <p style="color:#7a7a9a;font-size:0.92rem;font-weight:300;">Crafting visual stories that convert with AI innovation and design excellence.</p>
+                        <div class="tags">
+                            <span class="tag">AI UGC</span>
+                            <span class="tag">Logo Design</span>
+                            <span class="tag">Creative</span>
+                            <span class="tag">Punjab, India</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <p>CORRUM is a creative studio passionate about leveraging AI technology and design expertise to create impactful visual content that tells your brand story effectively.</p>
+                    <p>With a focus on <strong>AI-generated UGC content</strong> and <strong>custom logo design</strong>, we help brands stand out with authentic, engaging visuals that resonate with audiences.</p>
+                    <p>Every project blends <strong>creativity with technology</strong>, delivering solutions that aren't just beautiful — they drive real business results.</p>
+                    <div style="margin-top:2rem;">
+                        <a href="#contact" class="btn btn-primary">Start Your Project →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section-dark">
+        <div class="section-inner">
+            <div class="section-label reveal">What We Offer</div>
+            <h2 class="reveal">Specialized Services</h2>
+            <p class="section-desc reveal">Focused expertise in two powerful services that drive engagement and brand identity.</p>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <span class="service-icon">🤖</span>
+                    <h3>AI UGC Content</h3>
+                    <p>AI-generated product showcase videos and ad creatives that look real, feel authentic, and convert viewers into customers.</p>
+                    <ul class="features">
+                        <li>AI product demonstration videos</li>
+                        <li>Authentic-looking ad creatives</li>
+                        <li>Instagram & Meta Ads ready</li>
+                        <li>AI voiceover integration</li>
+                        <li>Brand-consistent visuals</li>
+                    </ul>
+                    <div class="price">From ₹999</div>
+                    <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">Order Now</a>
+                </div>
+                <div class="service-card reveal">
+                    <span class="service-icon">✨</span>
+                    <h3>Logo Design</h3>
+                    <p>Custom, memorable logo designs that capture your brand essence and make a lasting impression on every audience.</p>
+                    <ul class="features">
+                        <li>Original, custom designs</li>
+                        <li>Multiple concepts & revisions</li>
+                        <li>All file formats provided</li>
+                        <li>Brand guideline ready</li>
+                        <li>100% unique ownership</li>
+                    </ul>
+                    <div class="price">From ₹1,499</div>
+                    <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section-light">
+        <div class="section-inner">
+            <div class="section-label reveal">Portfolio</div>
+            <h2 class="reveal">Recent Projects</h2>
+            <p class="section-desc reveal">Showcasing our best work across AI UGC and logo design.</p>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-thumb t1">🤖</div>
+                    <div class="project-info">
+                        <div class="project-type">AI UGC Content</div>
+                        <h3>Skincare Product Video</h3>
+                        <p>AI-generated showcase video for a skincare brand — optimized for Instagram ads and TikTok campaigns.</p>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="project-thumb t2">🎯</div>
+                    <div class="project-info">
+                        <div class="project-type">Logo Design</div>
+                        <h3>Tech Startup Logo</h3>
+                        <p>Modern, minimalist logo for a tech startup featuring innovative branding elements.</p>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="project-thumb t3">📱</div>
+                    <div class="project-info">
+                        <div class="project-type">AI UGC Content</div>
+                        <h3>Mobile App Promo</h3>
+                        <p>Dynamic AI-generated promo video showcasing app features with engaging transitions and effects.</p>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <div class="project-thumb t4">🌟</div>
+                    <div class="project-info">
+                        <div class="project-type">Logo Design</div>
+                        <h3>Lifestyle Brand Identity</h3>
+                        <p>Premium logo and complete brand identity guidelines for a lifestyle brand.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="section-dark">
+        <div class="section-inner">
+            <div class="section-label reveal">Our Workflow</div>
+            <h2 class="reveal">Simple & Effective</h2>
+            <p class="section-desc reveal">A streamlined process designed for clarity, quality, and your satisfaction.</p>
+            <div class="process-grid">
+                <div class="process-step reveal">
+                    <div class="step-num">01</div>
+                    <h3>Discovery Call</h3>
+                    <p>Free consultation to understand your vision and brand requirements in detail.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-num">02</div>
+                    <h3>Creative Brief</h3>
+                    <p>Detailed brief with concepts, timelines, and deliverables for your approval.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-num">03</div>
+                    <h3>Production</h3>
+                    <p>Creating your content with regular updates and feedback opportunities.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-num">04</div>
+                    <h3>Delivery & Support</h3>
+                    <p>Final delivery with unlimited revisions until you're 100% satisfied.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section-light">
+        <div class="section-inner">
+            <div class="section-label reveal">Get In Touch</div>
+            <h2 class="reveal">Let's Create Something Amazing</h2>
+            <p class="section-desc reveal">Ready to elevate your brand? Reach out and we'll respond within 24 hours.</p>
+            <div class="contact-wrapper">
+                <div class="reveal">
+                    <div class="contact-info">
+                        <h3>Direct Contact</h3>
+                        <p>CORRUM is available for new projects and collaborations. Get in touch via your preferred channel.</p>
+                    </div>
+                    <a href="https://wa.me/918146254587" class="contact-item" target="_blank">
+                        <div class="contact-icon">💬</div>
+                        <div class="contact-text">
+                            <strong>WhatsApp</strong>
+                            <span>+91 8146254587 — fastest response</span>
+                        </div>
+                    </a>
+                    <a href="mailto:corrum.team@gmail.com" class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-text">
+                            <strong>Email</strong>
+                            <span>corrum.team@gmail.com</span>
+                        </div>
+                    </a>
+                    <a href="https://instagram.com/corrum.studio" class="contact-item" target="_blank">
+                        <div class="contact-icon">📸</div>
+                        <div class="contact-text">
+                            <strong>Instagram</strong>
+                            <span>@corrum.studio — view recent work</span>
+                        </div>
+                    </a>
+                    <a href="https://fiverr.com/corrum_studio" class="contact-item" target="_blank">
+                        <div class="contact-icon">⭐</div>
+                        <div class="contact-text">
+                            <strong>Fiverr</strong>
+                            <span>Order with buyer protection</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="reveal">
+                    <div class="contact-form">
+                        <div class="form-title">Send a Message</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" id="fname" placeholder="Enter your name" />
+                            </div>
+                            <div class="form-group">
+                                <label>Email or Phone</label>
+                                <input type="text" id="femail" placeholder="+91 or email" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Interested In</label>
+                            <select id="fservice">
+                                <option value="">Select a service...</option>
+                                <option>AI UGC Content</option>
+                                <option>Logo Design</option>
+                                <option>Both Services</option>
+                                <option>Custom Package</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Project Details</label>
+                            <textarea id="fmessage" placeholder="Tell us about your project, vision, and timeline..."></textarea>
+                        </div>
+                        <button class="btn btn-primary" onclick="handleSubmit()" style="width:100%;justify-content:center;">
+                            Send Message →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-logo">CORRUM</div>
+    <p class="footer-copy">© 2025 · Crafted with ❤️ in Punjab, India</p>
+    <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#projects">Portfolio</a>
+        <a href="#contact">Contact</a>
+    </div>
+</footer>
+
+<!-- FIX 4 — TOAST -->
+<div class="toast" id="toast">✅ Redirecting to WhatsApp — let's chat!</div>
+
+<script>
+    // FIX 2 — Scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 60);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // FIX 1 — Mobile nav functions
+    function openMobileNav() {
+        document.getElementById('mobileNav').classList.add('open');
+        document.getElementById('hamburger').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+        document.getElementById('mobileNav').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // FIX 4 — Form with toast confirmation
+    function handleSubmit() {
+        const name = document.getElementById('fname').value.trim();
+        const contact = document.getElementById('femail').value.trim();
+        const service = document.getElementById('fservice').value;
+        const message = document.getElementById('fmessage').value.trim();
+
+        if (!name || !contact || !service || !message) {
+            alert('Please fill in all fields before sending.');
+            return;
+        }
+
+        const text = `Hi CORRUM! I'm ${name}.\nService: ${service}\nContact: ${contact}\nProject: ${message}`;
+        window.open(`https://wa.me/918146254587?text=${encodeURIComponent(text)}`, '_blank');
+
+        // Show toast
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+
+        // Reset form
+        document.getElementById('fname').value = '';
+        document.getElementById('femail').value = '';
+        document.getElementById('fservice').value = '';
+        document.getElementById('fmessage').value = '';
+    }
+
+    // Close mobile nav on resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) closeMobileNav();
+    });
+</script>
+</body>
+</html>
