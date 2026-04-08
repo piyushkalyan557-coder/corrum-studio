@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORRUM — AI UGC & Logo Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05050a;--bg2:#080810;--card:#0d0d18;
+  --b:rgba(255,255,255,0.06);--bg3:rgba(139,92,246,0.3);
+  --p:#8b5cf6;--p2:#a78bfa;--pk:#ec4899;
+  --t:#f8f8ff;--m:#6b6b8a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--t);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(5,5,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--b);}
+.logo{font-family:'Bricolage Grotesque',sans-serif;font-size:1.2rem;font-weight:800;color:var(--t);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.ldot{width:8px;height:8px;background:linear-gradient(135deg,var(--p),var(--pk));border-radius:50%;animation:lp 2s ease infinite;}
+@keyframes lp{0%,100%{box-shadow:0 0 0 0 rgba(139,92,246,.5);}50%{box-shadow:0 0 0 8px rgba(139,92,246,0);}}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--m);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--t);}
+.nav-btn{padding:.5rem 1.3rem;background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;font-size:.82rem;font-weight:700;border-radius:50px;text-decoration:none;transition:all .3s;}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(139,92,246,.5);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.hbg span{display:block;width:22px;height:1.5px;background:var(--t);border-radius:2px;}
+
+/* MOBILE NAV */
+.mob{display:none;flex-direction:column;position:fixed;inset:0;background:rgba(5,5,10,.98);backdrop-filter:blur(30px);z-index:999;align-items:center;justify-content:center;gap:2.5rem;}
+.mob.open{display:flex;}
+.mob a{color:var(--t);text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;}
+.mob-x{position:absolute;top:1.5rem;right:5%;background:none;border:none;color:var(--t);font-size:1.5rem;cursor:pointer;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 5% 4rem;position:relative;z-index:1;overflow:hidden;}
+.hmesh{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(139,92,246,.18) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 90% 90%,rgba(236,72,153,.1) 0%,transparent 55%);pointer-events:none;}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(139,92,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.04) 1px,transparent 1px);background-size:55px 55px;-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 30%,transparent 100%);pointer-events:none;}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:50px;padding:.4rem 1rem;font-size:.76rem;font-weight:600;color:var(--p2);margin-bottom:1.8rem;animation:up .9s ease .1s both;}
+.bdot{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:bp 1.5s ease infinite;}
+@keyframes bp{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5);}50%{box-shadow:0 0 0 6px transparent;}}
+h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2.8rem,7vw,6rem);font-weight:800;line-height:1.05;letter-spacing:-2px;max-width:860px;margin-bottom:1.4rem;animation:up .9s ease .25s both;}
+.grad{background:linear-gradient(135deg,#fff 0%,var(--p2) 45%,var(--pk) 75%,#f59e0b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200%;animation:gm 4s linear infinite;}
+@keyframes gm{0%{background-position:0%}100%{background-position:200%}}
+.hsub{font-size:1.05rem;color:var(--m);max-width:540px;font-weight:300;line-height:1.75;margin-bottom:2.5rem;animation:up .9s ease .4s both;}
+.hbtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:up .9s ease .55s both;}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:.85rem 1.9rem;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all .3s;}
+.bp{background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;box-shadow:0 0 25px rgba(139,92,246,.35);}
+.bp:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(139,92,246,.55);}
+.bg{background:rgba(255,255,255,.05);color:var(--t);border:1px solid var(--b);}
+.bg:hover{background:rgba(255,255,255,.09);border-color:rgba(139,92,246,.35);transform:translateY(-3px);}
+
+/* CANVAS */
+#pc{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.45;}
+
+/* MARQUEE */
+.mq{padding:3rem 0;overflow:hidden;position:relative;z-index:1;border-top:1px solid var(--b);border-bottom:1px solid var(--b);background:var(--bg);}
+.mqlbl{text-align:center;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--m);margin-bottom:1.4rem;}
+.mqwrap{display:flex;overflow:hidden;}
+.mqt{display:flex;gap:12px;animation:mq 35s linear infinite;}
+.mqwrap:hover .mqt{animation-play-state:paused;}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mc{width:180px;height:120px;border-radius:12px;border:1px solid var(--b);overflow:hidden;flex-shrink:0;transition:transform .3s,border-color .3s;}
+.mc:hover{transform:scale(1.05);border-color:rgba(139,92,246,.4);}
+.mc img{width:100%;height:100%;object-fit:cover;display:block;}
+.mce{display:flex;align-items:center;justify-content:center;font-size:2rem;}
+.mce1{background:linear-gradient(135deg,#0d0820,#1a0d35);}
+.mce2{background:linear-gradient(135deg,#0a1520,#0d2535);}
+.mce3{background:linear-gradient(135deg,#150520,#2a1040);}
+
+/* SECTION COMMONS */
+.sec{padding:6rem 5%;position:relative;z-index:1;}
+.sec.alt{background:var(--bg2);}
+.si{max-width:1080px;margin:0 auto;}
+.ey{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--p2);margin-bottom:.9rem;}
+h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin-bottom:.9rem;}
+.sp{color:var(--m);font-size:.98rem;font-weight:300;line-height:1.75;max-width:500px;margin-bottom:3rem;}
+
+/* ABOUT */
+.ag{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;}
+.acard{background:var(--card);border:1px solid var(--b);border-radius:24px;padding:2.5rem;position:relative;overflow:hidden;}
+.acard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--p),var(--pk),transparent);}
+.ashimmer{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(139,92,246,.04) 50%,transparent 60%);background-size:200%;animation:sh 3s ease infinite;pointer-events:none;}
+@keyframes sh{0%{background-position:-200%}100%{background-position:200%}}
+.av{width:76px;height:76px;background:linear-gradient(135deg,var(--p),var(--pk));border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.4rem;box-shadow:0 8px 28px rgba(139,92,246,.35);animation:af 4s ease-in-out infinite;}
+@keyframes af{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.aname{font-family:'Bricolage Grotesque',sans-serif;font-size:1.35rem;font-weight:800;margin-bottom:3px;}
+.arole{font-size:.8rem;color:var(--p2);font-weight:600;margin-bottom:1rem;}
+.abio{font-size:.86rem;color:var(--m);font-weight:300;line-height:1.65;margin-bottom:1.4rem;}
+.tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);color:var(--p2);font-size:.72rem;font-weight:600;padding:4px 11px;border-radius:50px;}
+.afb{position:absolute;background:var(--card);border:1px solid var(--b);border-radius:12px;padding:10px 14px;font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:7px;box-shadow:0 8px 28px rgba(0,0,0,.4);white-space:nowrap;animation:ff 4s ease-in-out infinite;}
+.afb1{top:-14px;right:-14px;}
+.afb2{bottom:-14px;left:-14px;animation-delay:2s;}
+@keyframes ff{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.atxt p{color:var(--m);margin-bottom:1.1rem;font-weight:300;font-size:.98rem;line-height:1.8;}
+.atxt p strong{color:var(--t);font-weight:600;}
+
+/* SERVICES */
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.svc{background:var(--card);border:1px solid var(--b);border-radius:22px;padding:2.3rem;position:relative;overflow:hidden;transition:all .35s;}
+.svc:hover{border-color:rgba(139,92,246,.3);transform:translateY(-7px);box-shadow:0 22px 55px rgba(0,0,0,.4);}
+.svc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--p),transparent);opacity:0;transition:opacity .3s;}
+.svc:hover::before{opacity:1;}
+.sico{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:1.6rem;}
+.sico.pu{background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(167,139,250,.1));border:1px solid rgba(139,92,246,.2);}
+.sico.pk{background:linear-gradient(135deg,rgba(236,72,153,.2),rgba(244,114,182,.1));border:1px solid rgba(236,72,153,.2);}
+.sttl{font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:9px;}
+.sdsc{color:var(--m);font-size:.88rem;font-weight:300;line-height:1.7;margin-bottom:1.6rem;}
+.slist{list-style:none;margin-bottom:1.8rem;}
+.slist li{font-size:.84rem;color:var(--m);padding:7px 0;display:flex;align-items:center;gap:9px;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s,transform .2s;}
+.slist li:last-child{border-bottom:none;}
+.slist li:hover{color:var(--t);transform:translateX(4px);}
+.slist li::before{content:'';width:5px;height:5px;background:var(--p);border-radius:50%;flex-shrink:0;box-shadow:0 0 6px rgba(139,92,246,.6);}
+.sprice{font-family:'Bricolage Grotesque',sans-serif;font-size:1.35rem;font-weight:800;margin-bottom:1.4rem;}
+.sprice span{font-size:.78rem;color:var(--m);font-weight:400;font-family:'DM Sans',sans-serif;}
+
+/* PORTFOLIO GRID */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.pgrid .wide{grid-column:span 2;}
+.pc{background:var(--card);border:1px solid var(--b);border-radius:18px;overflow:hidden;transition:all .35s;}
+.pc:hover{transform:translateY(-5px);border-color:rgba(139,92,246,.28);box-shadow:0 20px 55px rgba(0,0,0,.5);}
+.pthumb{position:relative;overflow:hidden;background:#000;}
+.pthumb.tall{height:260px;}
+.pthumb.short{height:190px;}
+.pthumb img,.pthumb video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.pc:hover .pthumb img,.pc:hover .pthumb video{transform:scale(1.06);}
+.vtag{position:absolute;top:10px;right:10px;z-index:2;background:rgba(139,92,246,.88);color:#fff;font-size:.58rem;font-weight:800;padding:3px 9px;border-radius:50px;letter-spacing:1.2px;text-transform:uppercase;}
+.pem{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;height:190px;background:linear-gradient(135deg,#150520,#2a0a40);}
+.pbody{padding:1.2rem 1.4rem;}
+.ptag{font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--p2);margin-bottom:5px;}
+.pname{font-family:'Bricolage Grotesque',sans-serif;font-size:.98rem;font-weight:800;margin-bottom:4px;}
+.pdesc{font-size:.8rem;color:var(--m);font-weight:300;line-height:1.55;}
+
+/* PROCESS */
+.prg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;}
+.prline{position:absolute;top:38px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,var(--p),var(--pk));opacity:.2;}
+.prc{background:var(--card);border:1px solid var(--b);border-radius:18px;padding:1.8rem 1.3rem;text-align:center;transition:all .3s;position:relative;z-index:1;}
+.prc:hover{border-color:rgba(139,92,246,.3);transform:translateY(-5px);box-shadow:0 18px 40px rgba(139,92,246,.1);}
+.prnum{width:48px;height:48px;background:linear-gradient(135deg,var(--p),var(--pk));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.95rem;color:#fff;margin:0 auto 1rem;box-shadow:0 0 18px rgba(139,92,246,.4);}
+.pric{font-size:1.4rem;margin-bottom:.9rem;display:block;}
+.prttl{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.92rem;margin-bottom:7px;}
+.prdsc{font-size:.8rem;color:var(--m);font-weight:300;line-height:1.6;}
+
+/* STATS */
+.stats{padding:4.5rem 5%;position:relative;z-index:1;}
+.stin{max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:22px;overflow:hidden;}
+.stb{background:var(--card);padding:2.8rem 2rem;text-align:center;}
+.stv{font-family:'Bricolage Grotesque',sans-serif;font-size:2.8rem;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:7px;}
+.stv .ac{background:linear-gradient(135deg,var(--p2),var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stl{font-size:.76rem;color:var(--m);text-transform:uppercase;letter-spacing:1.5px;font-weight:500;}
+
+/* CONTACT */
+.cg{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start;}
+.ci h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1.35rem;font-weight:800;margin-bottom:.9rem;}
+.ci > p{color:var(--m);font-weight:300;line-height:1.7;margin-bottom:1.8rem;}
+.clinks{display:flex;flex-direction:column;gap:9px;}
+.clink{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--b);border-radius:14px;padding:.95rem 1.1rem;text-decoration:none;color:var(--t);transition:all .3s;}
+.clink:hover{border-color:rgba(139,92,246,.3);transform:translateX(5px);background:rgba(139,92,246,.04);}
+.cico{width:40px;height:40px;background:rgba(139,92,246,.09);border:1px solid rgba(139,92,246,.15);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.clt strong{display:block;font-size:.86rem;font-weight:700;margin-bottom:1px;}
+.clt span{font-size:.76rem;color:var(--m);}
+.cform{background:var(--card);border:1px solid var(--b);border-radius:22px;padding:2.3rem;position:relative;overflow:hidden;}
+.cform::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--p),var(--pk),transparent);}
+.fhead{font-family:'Bricolage Grotesque',sans-serif;font-size:1.05rem;font-weight:800;margin-bottom:1.4rem;color:var(--p2);}
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:12px;}
+.fg label{font-size:.7rem;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;}
+.fg input,.fg textarea,.fg select{background:rgba(255,255,255,.03);border:1.5px solid var(--b);border-radius:11px;padding:11px 13px;color:var(--t);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;width:100%;transition:all .25s;-webkit-appearance:none;appearance:none;}
+.fg input::placeholder,.fg textarea::placeholder{color:#3a3a5a;}
+.fg select option{background:#0d0d18;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:rgba(139,92,246,.5);background:rgba(139,92,246,.04);box-shadow:0 0 0 3px rgba(139,92,246,.08);}
+.fg textarea{resize:vertical;min-height:105px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--b);padding:2.2rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1;}
+.flogo{font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:var(--t);letter-spacing:1px;}
+.fcopy{font-size:.78rem;color:var(--m);}
+.flinks{display:flex;gap:1.4rem;}
+.flinks a{color:var(--m);text-decoration:none;font-size:.8rem;transition:color .2s;}
+.flinks a:hover{color:var(--t);}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;padding:.95rem 1.4rem;border-radius:13px;font-weight:700;font-size:.86rem;z-index:9999;transform:translateY(80px);opacity:0;transition:all .45s cubic-bezier(.16,1,.3,1);box-shadow:0 10px 35px rgba(139,92,246,.4);}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.rv.vis{opacity:1;transform:translateY(0);}
+.rvl{opacity:0;transform:translateX(-24px);transition:opacity .7s ease,transform .7s ease;}
+.rvl.vis{opacity:1;transform:translateX(0);}
+.rvr{opacity:0;transform:translateX(24px);transition:opacity .7s ease,transform .7s ease;}
+.rvr.vis{opacity:1;transform:translateX(0);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .ag,.cg{grid-template-columns:1fr;gap:2.5rem;}
+  .sg{grid-template-columns:1fr;}
+  .prg{grid-template-columns:repeat(2,1fr);}
+  .prline{display:none;}
+  .pgrid{grid-template-columns:1fr 1fr;}
+  .pgrid .wide{grid-column:span 2;}
+  .afb{display:none;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-btn{display:none;}
+  .hbg{display:flex;}
+  h1{font-size:2.6rem;letter-spacing:-1.2px;}
+  .hbtns{flex-direction:column;align-items:center;}
+  .btn{width:100%;max-width:280px;justify-content:center;}
+  .pgrid,.pgrid .wide{grid-template-columns:1fr;grid-column:span 1;}
+  .stin{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;}
+  .flinks{justify-content:center;}
+  .frow{grid-template-columns:1fr;}
+  .sec{padding:4.5rem 5%;}
+}
+@media(max-width:480px){
+  h1{font-size:2rem;letter-spacing:-1px;}
+  .prg{grid-template-columns:1fr;}
+  .cform{padding:1.6rem;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="pc"></canvas>
+
+<div class="mob" id="mob">
+  <button class="mob-x" onclick="closeMob()">✕</button>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#projects" onclick="closeMob()">Portfolio</a>
+  <a href="#process" onclick="closeMob()">Process</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
+
+<nav>
+  <a href="#hero" class="logo"><span class="ldot"></span>CORRUM</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Portfolio</a></li>
+    <li><a href="#process">Process</a></li>
+  </ul>
+  <a href="#contact" class="nav-btn">Work With Me ✦</a>
+  <button class="hbg" onclick="openMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hmesh"></div>
+  <div class="hgrid"></div>
+  <div class="badge"><span class="bdot"></span>Available for Projects · Punjab, India</div>
+  <h1>AI Visuals &<br><span class="grad">Iconic Logos</span><br>That Convert.</h1>
+  <p class="hsub">CORRUM creates scroll-stopping AI UGC content and memorable logo designs that elevate your brand and drive real results.</p>
+  <div class="hbtns">
+    <a href="#projects" class="btn bp">View My Work ✦</a>
+    <a href="#contact" class="btn bg">Let's Collaborate</a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mqlbl">Sample Work Gallery — Hover to Pause</div>
+  <div class="mqwrap">
+    <div class="mqt">
+      <div class="mc"><img src="assets/asset_1.jpg" alt="Voltix" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_2.jpg" alt="Scentiq" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_3.jpg" alt="Aurelle" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_4.jpg" alt="Aeron" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_5.jpg" alt="Virel Watch" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_6.jpg" alt="Watch" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_7.jpg" alt="Noxen" loading="lazy"/></div>
+      <div class="mc mce mce1">✨</div>
+      <div class="mc mce mce2">💎</div>
+      <div class="mc mce mce3">🚀</div>
+      <div class="mc"><img src="assets/asset_8.jpg" alt="Voltix" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_9.jpg" alt="Noxen" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_10.jpg" alt="Watch" loading="lazy"/></div>
+      <!-- duplicate for seamless loop -->
+      <div class="mc"><img src="assets/asset_11.jpg" alt="Voltix" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_12.jpg" alt="Scentiq" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_13.jpg" alt="Aurelle" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_14.jpg" alt="Aeron" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_15.jpg" alt="Virel Watch" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_16.jpg" alt="Watch" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_17.jpg" alt="Noxen" loading="lazy"/></div>
+      <div class="mc mce mce1">✨</div>
+      <div class="mc mce mce2">💎</div>
+      <div class="mc mce mce3">🚀</div>
+      <div class="mc"><img src="assets/asset_18.jpg" alt="Voltix" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_19.jpg" alt="Noxen" loading="lazy"/></div>
+      <div class="mc"><img src="assets/asset_20.jpg" alt="Watch" loading="lazy"/></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="sec alt">
+  <div class="si">
+    <div class="ag">
+      <div class="rvl" style="position:relative;">
+        <div class="acard">
+          <div class="ashimmer"></div>
+          <div class="av">🎨</div>
+          <div class="aname">CORRUM</div>
+          <div class="arole">AI Content Creator & Logo Designer</div>
+          <p class="abio">Crafting visual stories that convert using AI innovation and design excellence. Based in Punjab, India.</p>
+          <div class="tags">
+            <span class="tag">AI UGC</span>
+            <span class="tag">Logo Design</span>
+            <span class="tag">Creative Studio</span>
+            <span class="tag">Punjab, IN</span>
+          </div>
+        </div>
+        <div class="afb afb1">🚀 Open to Work</div>
+        <div class="afb afb2">⚡ 24h Response</div>
+      </div>
+      <div class="rvr atxt">
+        <div class="ey">About CORRUM</div>
+        <h2>Designing Your<br>Digital Future.</h2>
+        <p>CORRUM is a creative studio from <strong>Punjab, India</strong> using AI technology and design expertise to create visual content that tells your brand story.</p>
+        <p>Focused on <strong>AI-generated UGC content</strong> and <strong>custom logo design</strong>, we help brands stand out with authentic, engaging visuals.</p>
+        <p>Every project blends <strong>creativity with technology</strong> — delivering results that aren't just beautiful, they drive real business growth.</p>
+        <div style="margin-top:2rem;"><a href="#contact" class="btn bp">Start Your Project ✦</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="sec">
+  <div class="si">
+    <div class="ey rv">Specialized Services</div>
+    <h2 class="rv">What We Create</h2>
+    <p class="sp rv">Two powerful services that drive engagement and brand identity.</p>
+    <div class="sg">
+      <div class="svc rv">
+        <div class="sico pu">🤖</div>
+        <div class="sttl">AI UGC Content</div>
+        <p class="sdsc">AI-generated product videos and ad creatives that look authentic and convert viewers into customers.</p>
+        <ul class="slist">
+          <li>AI product demonstration videos</li>
+          <li>Authentic-looking ad creatives</li>
+          <li>Instagram & Meta Ads ready</li>
+          <li>AI voiceover integration</li>
+          <li>Brand-consistent visuals</li>
+        </ul>
+        <div class="sprice">₹999 <span>/ project</span></div>
+        <a href="#contact" class="btn bp" style="width:100%;justify-content:center;">Order Now ✦</a>
+      </div>
+      <div class="svc rv">
+        <div class="sico pk">✨</div>
+        <div class="sttl">Logo Design</div>
+        <p class="sdsc">Custom memorable logos that capture your brand essence and make a lasting impression on every audience.</p>
+        <ul class="slist">
+          <li>Original, custom designs</li>
+          <li>Multiple concepts & revisions</li>
+          <li>All file formats provided</li>
+          <li>Brand guideline ready</li>
+          <li>100% unique ownership</li>
+        </ul>
+        <div class="sprice">₹1,499 <span>/ project</span></div>
+        <a href="#contact" class="btn bp" style="width:100%;justify-content:center;">Get Started ✦</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="projects" class="sec alt">
+  <div class="si">
+    <div class="ey rv">Portfolio</div>
+    <h2 class="rv">Real Work. Real Results.</h2>
+    <p class="sp rv">AI-generated content for real brands. Videos play automatically.</p>
+    <div class="pgrid">
+      <!-- Row 1: Video wide + Watch tall -->
+      <div class="pc wide rv">
+        <div class="pthumb tall">
+          <video muted loop playsinline autoplay preload="auto" poster="assets/asset_22.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <source src="assets/asset_21.mp4" type="video/mp4">
+          </video>
+          <div class="vtag">▶ AI VIDEO</div>
+        </div>
+        <div class="pbody">
+          <div class="ptag">AI UGC Video</div>
+          <div class="pname">Voltix Air — Wireless Earbuds</div>
+          <p class="pdesc">Cinematic product ad for Voltix wireless earbuds. Built for Instagram Reels and Meta campaigns.</p>
+        </div>
+      </div>
+      <div class="pc rv">
+        <div class="pthumb tall">
+          <img src="assets/asset_22.jpg" alt="Virel Watch" loading="lazy"/>
+        </div>
+        <div class="pbody">
+          <div class="ptag">AI UGC Content</div>
+          <div class="pname">Virel — Luxury Watch</div>
+          <p class="pdesc">Dark cinematic AI product visual. Premium aesthetic for luxury brand advertising.</p>
+        </div>
+      </div>
+      <!-- Row 2: Noxen + Skincare video wide -->
+      <div class="pc rv">
+        <div class="pthumb short">
+          <img src="assets/asset_23.jpg" alt="Noxen Sneaker" loading="lazy"/>
+        </div>
+        <div class="pbody">
+          <div class="ptag">AI UGC Content</div>
+          <div class="pname">Noxen — Streetwear Sneaker</div>
+          <p class="pdesc">High-energy AI ad with neon lighting and smoke effects for streetwear brand.</p>
+        </div>
+      </div>
+      <div class="pc wide rv">
+        <div class="pthumb short">
+          <video muted loop playsinline autoplay preload="auto" poster="assets/asset_25.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <source src="assets/asset_24.mp4" type="video/mp4">
+          </video>
+          <div class="vtag">▶ AI VIDEO</div>
+        </div>
+        <div class="pbody">
+          <div class="ptag">AI UGC Video</div>
+          <div class="pname">Luxury Skincare — 15s Ad</div>
+          <p class="pdesc">Premium skincare ad built for Instagram and TikTok brand campaigns.</p>
+        </div>
+      </div>
+      <!-- Row 3: 3 images -->
+      <div class="pc rv">
+        <div class="pthumb short"><img src="assets/asset_25.jpg" alt="Aeron Sneaker" loading="lazy"/></div>
+        <div class="pbody">
+          <div class="ptag">AI UGC Content</div>
+          <div class="pname">Aeron — Luxury Sneaker</div>
+          <p class="pdesc">Minimal luxury AI visual with ethereal smoke and pedestal staging.</p>
+        </div>
+      </div>
+      <div class="pc rv">
+        <div class="pthumb short"><img src="assets/asset_26.jpg" alt="Sport Watch" loading="lazy"/></div>
+        <div class="pbody">
+          <div class="ptag">AI UGC Content</div>
+          <div class="pname">Premium Watch — Sport</div>
+          <p class="pdesc">AI-crafted sport luxury watch visual with navy dial and steel bracelet.</p>
+        </div>
+      </div>
+      <div class="pc rv">
+        <div class="pthumb short"><img src="assets/asset_27.jpg" alt="Scentiq" loading="lazy"/></div>
+        <div class="pbody">
+          <div class="ptag">AI UGC Content</div>
+          <div class="pname">Scentiq — Luxury Perfume</div>
+          <p class="pdesc">Cinematic smoke and glass AI visual. Dark luxury aesthetic.</p>
+        </div>
+      </div>
+      <!-- Row 4 -->
+      <div class="pc rv">
+        <div class="pthumb short"><img src="assets/asset_28.jpg" alt="Aurelle" loading="lazy"/></div>
+        <div class="pbody">
+          <div class="ptag">AI UGC Content</div>
+          <div class="pname">Aurelle — Luxury Jewelry</div>
+          <p class="pdesc">Soft gold luxury aesthetic AI visual for butterfly necklace brand.</p>
+        </div>
+      </div>
+      <div class="pc rv">
+        <div class="pthumb short"><img src="assets/asset_29.jpg" alt="Voltix Still" loading="lazy"/></div>
+        <div class="pbody">
+          <div class="ptag">AI UGC Content</div>
+          <div class="pname">Voltix Air — Product Still</div>
+          <p class="pdesc">Studio-quality neon AI product still for premium tech brand identity.</p>
+        </div>
+      </div>
+      <div class="pc rv">
+        <div class="pem">
+          <span style="font-size:2.5rem;">✨</span>
+          <span style="font-size:.68rem;color:rgba(255,255,255,.3);font-weight:700;letter-spacing:2px;text-transform:uppercase;">Your Project</span>
+        </div>
+        <div class="pbody">
+          <div class="ptag">Next Project</div>
+          <div class="pname">Your Brand Here</div>
+          <p class="pdesc">Ready to create stunning AI visuals for your brand? Let's build something iconic.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stin rv">
+    <div class="stb"><div class="stv" id="s1">50<span class="ac">+</span></div><div class="stl">Projects Done</div></div>
+    <div class="stb"><div class="stv" id="s2">100<span class="ac">%</span></div><div class="stl">Satisfaction</div></div>
+    <div class="stb"><div class="stv" id="s3">24<span class="ac">h</span></div><div class="stl">Response Time</div></div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process" class="sec alt">
+  <div class="si">
+    <div class="ey rv">Workflow</div>
+    <h2 class="rv">Simple & Effective</h2>
+    <p class="sp rv">A clear process built for quality and your complete satisfaction.</p>
+    <div class="prg">
+      <div class="prline"></div>
+      <div class="prc rv"><div class="prnum">01</div><span class="pric">💬</span><div class="prttl">Discovery Call</div><p class="prdsc">Free consultation to understand your vision and brand requirements.</p></div>
+      <div class="prc rv"><div class="prnum">02</div><span class="pric">📋</span><div class="prttl">Creative Brief</div><p class="prdsc">Detailed plan with concepts, timeline, and deliverables for your approval.</p></div>
+      <div class="prc rv"><div class="prnum">03</div><span class="pric">⚙️</span><div class="prttl">Production</div><p class="prdsc">Creating content with regular updates and feedback opportunities.</p></div>
+      <div class="prc rv"><div class="prnum">04</div><span class="pric">🚀</span><div class="prttl">Delivery</div><p class="prdsc">Final delivery with revisions until you're 100% satisfied.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec">
+  <div class="si">
+    <div class="ey rv">Get In Touch</div>
+    <h2 class="rv">Let's Create<br>Something Amazing.</h2>
+    <p class="sp rv">Ready to elevate your brand? We'll respond within 24 hours.</p>
+    <div class="cg">
+      <div class="rvl">
+        <div class="ci">
+          <h3>Direct Contact</h3>
+          <p>Available for new projects. Reach us via your preferred channel.</p>
+        </div>
+        <div class="clinks">
+          <a href="https://wa.me/918146254587" class="clink" target="_blank"><div class="cico">💬</div><div class="clt"><strong>WhatsApp</strong><span>+91 8146254587 — fastest response</span></div></a>
+          <a href="mailto:corrum.team@gmail.com" class="clink"><div class="cico">📧</div><div class="clt"><strong>Email</strong><span>corrum.team@gmail.com</span></div></a>
+          <a href="https://instagram.com/corrum.studio" class="clink" target="_blank"><div class="cico">📸</div><div class="clt"><strong>Instagram</strong><span>@corrum.studio</span></div></a>
+          <a href="https://fiverr.com/corrum_studio" class="clink" target="_blank"><div class="cico">⭐</div><div class="clt"><strong>Fiverr</strong><span>Order with buyer protection</span></div></a>
+        </div>
+      </div>
+      <div class="rvr">
+        <div class="cform">
+          <div class="fhead">Send a Message ✦</div>
+          <div class="frow">
+            <div class="fg"><label>Your Name</label><input type="text" id="fn" placeholder="Enter your name"/></div>
+            <div class="fg"><label>Phone / Email</label><input type="text" id="fe" placeholder="+91 or email"/></div>
+          </div>
+          <div class="fg"><label>Service Needed</label>
+            <select id="fs"><option value="">Select a service...</option><option>AI UGC Content</option><option>Logo Design</option><option>Both Services</option><option>Custom Package</option></select>
+          </div>
+          <div class="fg"><label>Project Details</label><textarea id="fm" placeholder="Describe your project and goals..."></textarea></div>
+          <button class="btn bp" onclick="send()" style="width:100%;justify-content:center;margin-top:4px;">Send Message ✦</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">CORRUM</div>
+  <p class="fcopy">© 2025 · Crafted with ❤️ in Punjab, India</p>
+  <div class="flinks"><a href="#services">Services</a><a href="#projects">Portfolio</a><a href="#contact">Contact</a></div>
+</footer>
+
+<div class="toast" id="toast">✅ Opening WhatsApp — chat soon!</div>
+
+<script>
+// PARTICLES
+var canvas=document.getElementById('pc'),ctx=canvas.getContext('2d'),W,H,pts=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+resize();addEventListener('resize',resize);
+function P(){this.x=Math.random()*W;this.y=Math.random()*H;this.s=Math.random()*1.2+.3;this.vx=(Math.random()-.5)*.28;this.vy=(Math.random()-.5)*.28;this.o=Math.random()*.35+.1;this.c=Math.random()>.5?'139,92,246':'236,72,153';}
+P.prototype.u=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H){this.x=Math.random()*W;this.y=Math.random()*H;}};
+P.prototype.d=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,6.28);ctx.fillStyle='rgba('+this.c+','+this.o+')';ctx.fill();};
+for(var i=0;i<90;i++)pts.push(new P());
+(function loop(){ctx.clearRect(0,0,W,H);pts.forEach(function(p){p.u();p.d();});for(var i=0;i<pts.length;i++)for(var j=i+1;j<pts.length;j++){var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<85){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='rgba(139,92,246,'+(0.04*(1-d/85))+')';ctx.lineWidth=.5;ctx.stroke();}};requestAnimationFrame(loop);}());
+
+// SCROLL REVEAL
+var ro=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('vis');},i*65);ro.unobserve(e.target);}})},{threshold:0.08});
+document.querySelectorAll('.rv,.rvl,.rvr').forEach(function(el){ro.observe(el);});
+
+// VIDEO AUTOPLAY — ensure videos play
+document.querySelectorAll('video').forEach(function(v){
+  v.play().catch(function(){});
+});
+// Also play on first user interaction (mobile)
+document.addEventListener('touchstart',function(){document.querySelectorAll('video').forEach(function(v){v.play().catch(function(){});});},{once:true});
+document.addEventListener('click',function(){document.querySelectorAll('video').forEach(function(v){v.play().catch(function(){});});},{once:true});
+
+// Pause videos outside viewport, play when in view
+var vo=new IntersectionObserver(function(entries){entries.forEach(function(e){e.isIntersecting?e.target.play().catch(function(){}):e.target.pause();});},{threshold:0.25});
+document.querySelectorAll('video').forEach(function(v){vo.observe(v);});
+
+// MOBILE NAV
+function openMob(){document.getElementById('mob').classList.add('open');document.body.style.overflow='hidden';}
+function closeMob(){document.getElementById('mob').classList.remove('open');document.body.style.overflow='';}
+addEventListener('resize',function(){if(innerWidth>768)closeMob();});
+
+// NAV SCROLL
+addEventListener('scroll',function(){document.querySelector('nav').style.background=scrollY>50?'rgba(5,5,10,.95)':'rgba(5,5,10,.85)';});
+
+// STATS COUNT UP
+var ran=false;
+new IntersectionObserver(function(e){if(e[0].isIntersecting&&!ran){ran=true;[['s1',50,'+'],[' s2',100,'%'],['s3',24,'h']].forEach(function(x){var el=document.getElementById(x[0].trim()),n=0,ac=x[2];var t=setInterval(function(){n+=Math.ceil(x[1]/45);if(n>=x[1]){n=x[1];clearInterval(t);}el.innerHTML=n+'<span class="ac">'+ac+'</span>';'},28);});}},{threshold:.5}).observe(document.querySelector('.stin'));
+
+// FORM
+function send(){
+  var n=document.getElementById('fn').value.trim(),
+      e=document.getElementById('fe').value.trim(),
+      s=document.getElementById('fs').value,
+      m=document.getElementById('fm').value.trim();
+  if(!n||!e||!s||!m){alert('Please fill in all fields.');return;}
+  var txt='Hi CORRUM! I am '+n+'.
+Service: '+s+'
+Contact: '+e+'
+Project: '+m;
+  window.open('https://wa.me/918146254587?text='+encodeURIComponent(txt),'_blank');
+  var t=document.getElementById('toast');t.classList.add('show');setTimeout(function(){t.classList.remove('show');},4000);
+  ['fn','fe','fs','fm'].forEach(function(id){document.getElementById(id).value='';});
+}
+
+// MOBILE VIDEO FIX — play on any user interaction
+var _vids = document.querySelectorAll('video');
+_vids.forEach(function(v){ v.load(); v.play().catch(function(){}); });
+var _played = false;
+function _playAll(){
+  if(_played) return; _played = true;
+  _vids.forEach(function(v){ v.play().catch(function(){}); });
+}
+document.addEventListener('touchstart', _playAll, {passive:true});
+document.addEventListener('touchend', _playAll, {passive:true});
+document.addEventListener('scroll', _playAll, {passive:true, once:true});
+var _vo = new IntersectionObserver(function(en){
+  en.forEach(function(e){ e.isIntersecting ? e.target.play().catch(function(){}) : e.target.pause(); });
+}, {threshold:0.2});
+_vids.forEach(function(v){ _vo.observe(v); });
+</script>
+</body>
+</html>
